@@ -1,10 +1,15 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 
 const landing = () => {
+    const navigate = useNavigate();
+    const handleStart = () => {
+        navigate('/login');
+    }
+
   return (
     <div>
-        <Button variant="outline">Button</Button>
+        <Button onClick={handleStart}>Button</Button>
     </div>
   )
 }
