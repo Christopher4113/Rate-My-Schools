@@ -28,9 +28,9 @@ const Login = () => {
               backgroundImage: "url('public/Register-Background.png')",
             }}
           >
-            <h1 className="text-white text-3xl mb-3">Welcome</h1>
+            <h1 className="text-white text-3xl mb-3">Welcome Back!</h1>
             <div>
-              <p className="text-white">Enter your credentials to login</p>
+              <p className="text-white">Please log in to continue to your account.</p>
             </div>
           </div>
           <div className="w-full lg:w-1/2 py-16 px-12">

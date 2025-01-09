@@ -29,10 +29,10 @@ const Signup = () => {
               backgroundImage: "url('public/sunset.jpg')",
             }}
           >
-            <h1 className="text-white text-3xl mb-3">Welcome</h1>
+            <h1 className="text-white text-3xl mb-3">Join Us Today</h1>
             <div>
               <p className="text-white">
-                Create your acount
+                Create your account to unlock access to the rating systems!
   
               </p>
             </div>
