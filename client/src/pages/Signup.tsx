@@ -9,7 +9,6 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
-    provider: ""
   });
   const [confirm, setConfirm] = useState("");
 
@@ -30,13 +29,10 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8080/user", {
-        ...user,
-        provider: "manual",
-      });
+      const response = await axios.post("http://localhost:8080/auth/signup", user);
       console.log("Signup success", response.data);
       alert("Check your email to verify your account");
-      navigate("/login");
+      navigate(`/verify?email=${encodeURIComponent(email)}`);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         console.log("Signup failed", error.response.data.error);
@@ -48,8 +44,7 @@ const Signup = () => {
       setUser({
         username: "",
         email: "",
-        password: "",
-        provider: "manual",
+        password: ""
       });
     }
   };

@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Forgot from './pages/Forgot';
 import Dashboard from './pages/Dashboard';
+import Verify from './pages/Verify';
 function App() {
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route path ="/signup" element={<Signup />} />
           <Route path ="/forgot" element={<Forgot />} />
           <Route path ="/dashboard" element={<Dashboard />} />
+          <Route path ="/verify" element={<Verify />} />
         </Routes>
     </BrowserRouter>
   )
