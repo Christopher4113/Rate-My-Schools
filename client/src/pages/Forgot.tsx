@@ -24,10 +24,10 @@ const Forgot = () => {
       return
     }
     try {
-      const response = await axios.post("http//localhost:8080/auth/forgot-password", user.email)
+      const response = await axios.post("http://localhost:8080/auth/forgotPassword", { email })
       console.log("Forgot was a success" + response.data)
       alert("Check your email to change your password")
-      navigate(`/change?email=${encodeURIComponent(user.email)}&newPassword=${encodeURIComponent(user.newPassword)}`);
+      navigate(`/change?email=${encodeURIComponent(email)}&newPassword=${encodeURIComponent(newPassword)}`);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
         console.log("Forgot failed", error.response.data.error);
@@ -36,10 +36,7 @@ const Forgot = () => {
         console.log("Forgot failed", error.message);
         alert("Forgot failed: " + error.message);
       }
-      setUser({
-        email: "",
-        newPassword: ""
-      });
+      setUser({ ...user, email: "", newPassword: "" });
       setConfirm("")
     }
   }
@@ -83,7 +80,7 @@ const Forgot = () => {
               <div className="mt-5">
                 <input
                   type="password"
-                  name='password'
+                  name='newPassword'
                   placeholder="Enter New Password"
                   className="border border-gray-400 py-1 px-2 w-full"
                   value={newPassword}
