@@ -1,15 +1,46 @@
 import {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 const Forgot = () => {
+  const [user,setUser] = useState({
+    email: "",
+    newPassword: ""
+  })
+  const [confirm, setConfirm] = useState("")
   const navigate = useNavigate();
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
   
+  const onConfirmChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirm(e.target.value);
+  };
+  const {email, newPassword } = user;
   
   const handleForgot = async (e: any) => {
     e.preventDefault();
+    if (newPassword !== confirm) {
+      alert("Passwords do not match please try again");
+      return
+    }
     try {
-      
+      const response = await axios.post("http//localhost:8080/auth/forgot-password", user.email)
+      console.log("Forgot was a success" + response.data)
+      alert("Check your email to change your password")
+      navigate(`/change?email=${encodeURIComponent(user.email)}&newPassword=${encodeURIComponent(user.newPassword)}`);
     } catch (error: any) {
-      
+      if (error.response && error.response.data && error.response.data.error) {
+        console.log("Forgot failed", error.response.data.error);
+        alert(error.response.data.error);
+      } else {
+        console.log("Forgot failed", error.message);
+        alert("Forgot failed: " + error.message);
+      }
+      setUser({
+        email: "",
+        newPassword: ""
+      });
+      setConfirm("")
     }
   }
   return (
@@ -43,21 +74,31 @@ const Forgot = () => {
                 <input
                   type="text"
                   placeholder="Email"
+                  name='email'
                   className="border border-gray-400 py-1 px-2 w-full"
+                  value={email}
+                  onChange={onInputChange}
                 />
               </div>
               <div className="mt-5">
                 <input
                   type="password"
+                  name='password'
                   placeholder="Enter New Password"
                   className="border border-gray-400 py-1 px-2 w-full"
+                  value={newPassword}
+                  onChange={onInputChange}
+                  
                 />
               </div>
               <div className="mt-5">
                 <input
                   type="password"
+                  name='newPassword'
                   placeholder="Confirm New Password"
                   className="border border-gray-400 py-1 px-2 w-full"
+                  value={confirm}
+                  onChange={onConfirmChange}
                 />
               </div>
               <div className="mt-5">

@@ -7,6 +7,7 @@ import Forgot from './pages/Forgot';
 import Dashboard from './pages/Dashboard';
 import Verify from './pages/Verify';
 import PrivateRoute from './PrivateRoute';
+import Change from './pages/Change';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           }
         />
         <Route path="/verify" element={<Verify />} />
+        <Route path="/change" element={<Change />} />
       </Routes>
     </BrowserRouter>
   );
