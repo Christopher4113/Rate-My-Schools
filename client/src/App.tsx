@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import Verify from './pages/Verify';
 import PrivateRoute from './PrivateRoute';
 import Change from './pages/Change';
+import Header from './components/custom/Header';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
+              <Header />
               <Dashboard />
             </PrivateRoute>
           }
