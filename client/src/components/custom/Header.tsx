@@ -20,16 +20,21 @@ const Header = () => {
   };
 
   return (
-    <div className="relative p-2 shadow-sm flex items-center justify-between px-5 max-sm:text-sm max-sm:scale-90 max-sm:space-2">
+    <div className="relative p-2 shadow-sm flex items-center justify-between px-5 max-sm:text-sm max-sm:scale-90 max-sm:space-2"
+    style={{
+      backgroundColor: "#007BFF",
+    }}
+    
+    
+    >
       {/* Option Button */}
       <div className="flex items-center -mt-6 max-sm:-ml-12">
         <Option onClick={toggleSidebar} />
       </div>
 
       {/* Main Title */}
-      <div className="text-center text-gray-600 font-semibold text-4xl max-sm:text-2xl">
-        RateMy
-        <span className="text-blue-800">Schools</span>
+      <div className="text-center text-white font-semibold text-4xl max-sm:text-2xl">
+        RateMySchools
       </div>
 
       {/* Spacer to balance alignment */}

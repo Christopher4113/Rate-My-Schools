@@ -10,7 +10,10 @@ const Option: React.FC<OptionProps> = ({ onClick }) => {
       onClick={onClick} // Forward the onClick prop to the button
       className="group relative inline-block w-[44px] p-[5px] h-[45px] m-[25px] 
                  border-none outline-none focus:outline-none active:outline-none"
-      style={{ WebkitTapHighlightColor: 'transparent' }} // Remove tap highlight on mobile
+      style={{
+        WebkitTapHighlightColor: 'transparent', // Remove tap highlight on mobile
+        background: 'transparent' // Remove white background
+      }}
     >
       <span
         className="mx-[auto] my-[0] relative top-[12px] w-[30px] h-[6px] bg-[#000] block 
