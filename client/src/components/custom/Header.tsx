@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Option from '../ui/option';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Option from "../ui/option";
 
 const Header = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
-    sessionStorage.removeItem('token'); // Clear sessionStorage
-    navigate('/login'); // Redirect to login page
+    sessionStorage.removeItem("token"); // Clear sessionStorage
+    navigate("/login"); // Redirect to login page
   };
 
   const handleMenu = () => {
-    navigate('/dashboard');
+    navigate("/dashboard");
   };
 
   const toggleSidebar = () => {
@@ -20,20 +20,17 @@ const Header = () => {
   };
 
   return (
-    <div className="relative p-2 shadow-sm flex items-center justify-between px-5 max-sm:text-sm max-sm:scale-90 max-sm:space-2"
-    style={{
-      backgroundColor: "#007BFF",
-    }}
-    
-    
+    <div
+      className="relative w-full h-16 flex items-center justify-between px-5 shadow-sm z-50 
+                 max-sm:h-14 max-sm:px-3 bg-blue-600"
     >
       {/* Option Button */}
-      <div className="flex items-center -mt-6 max-sm:-ml-12">
+      <div className="flex items-center -mt-6 max-sm:-ml-8">
         <Option onClick={toggleSidebar} />
       </div>
 
       {/* Main Title */}
-      <div className="text-center text-white font-semibold text-4xl max-sm:text-2xl">
+      <div className="text-center text-white font-semibold text-3xl max-sm:text-xl">
         RateMySchools
       </div>
 
