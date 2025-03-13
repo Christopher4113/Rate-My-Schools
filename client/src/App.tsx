@@ -9,6 +9,10 @@ import Verify from './pages/Verify';
 import PrivateRoute from './PrivateRoute';
 import Change from './pages/Change';
 import Header from './components/custom/Header';
+import Footer from './components/custom/Footer';
+import Tos from './pages/Tos';
+import About from './pages/About';
+import Allschools from './pages/Allschools';
 
 function App() {
   return (
@@ -25,6 +29,34 @@ function App() {
             <PrivateRoute>
               <Header />
               <Dashboard />
+              <Footer />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tos"
+          element={
+            <PrivateRoute>
+              <Header />
+              <Tos/>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/schools"
+          element={
+            <PrivateRoute>
+              <Header />
+              <Allschools />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PrivateRoute>
+              <Header />
+              <About />
             </PrivateRoute>
           }
         />
