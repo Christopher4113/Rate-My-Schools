@@ -1,9 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Allschools = () => {
-  return (
-    <div>Allschools</div>
-  )
+interface School {
+  id: number;
+  schoolName: string;
 }
 
-export default Allschools
+const AllSchools = () => {
+  const [schools, setSchools] = useState<School[]>([]);
+
+  useEffect(() => {
+    axios.get<School[]>('http://localhost:8080/auth/schools')
+      .then((response) => {
+        setSchools(response.data);
+      })
+      .catch((error) => console.error('Error fetching schools: ', error));
+  }, []);
+
+  const handleSchoolClick = (id: number) => {
+    console.log('School ID clicked: ', id);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Hero Section with Background Image */}
+      <div
+        className="w-full text-center py-10"
+        style={{
+          backgroundImage: `url('/Tos.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          height: '500px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      ></div>
+
+      <h1 className="font-bold text-2xl md:text-xl sm:text-lg" style={{ fontFamily: 'Times New Roman, Arial, sans-serif' }}>
+        All Schools
+      </h1>
+
+      {/* List of Schools */}
+      <ul className="mt-4 p-4">
+        {schools.map((school) => (
+          <li
+            key={school.id}
+            className="cursor-pointer text-blue-600 hover:underline p-2"
+            onClick={() => handleSchoolClick(school.id)}
+          >
+            {school.schoolName}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default AllSchools;
