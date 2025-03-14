@@ -20,6 +20,26 @@ const Footer = () => {
           About
         </a>
       </div>
+      <p
+      className="text-2xl md:text-xl sm:text-lg text-center text-white"
+      style={{
+        fontFamily: 'Times New Roman, Arial, sans-serif',
+        width: '80%',
+        maxWidth: '800px',
+        margin: '20px auto',
+        lineHeight: '1.6',
+        wordWrap: 'break-word',
+      }}
+    >
+      Need help? Contact us at{' '}
+      <a
+        href="mailto:ratemyschools@gmail.com"
+        style={{ color: '#fff', textDecoration: 'underline' }}
+      >
+        ratemyschools@gmail.com
+      </a>
+    </p>
+
     </div>
   );
 };
