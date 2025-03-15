@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface School {
   id: number;
@@ -50,6 +51,7 @@ const Dashboard: React.FC = () => {
   const [schools, setSchools] = useState<School[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredSchools, setFilteredSchools] = useState<School[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -72,6 +74,8 @@ const Dashboard: React.FC = () => {
 
   const handleSchoolClick = (id: number) => {
     console.log("School ID clicked:", id);
+    navigate(`/school/${id}`)
+    
   };
 
   return (

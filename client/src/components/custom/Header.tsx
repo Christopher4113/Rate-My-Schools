@@ -8,10 +8,12 @@ const Header = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("token"); // Clear sessionStorage
+    setSidebarOpen(false)
     navigate("/login"); // Redirect to login page
   };
 
   const handleMenu = () => {
+    setSidebarOpen(false)
     navigate("/dashboard");
   };
 

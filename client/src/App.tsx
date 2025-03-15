@@ -13,6 +13,7 @@ import Footer from './components/custom/Footer';
 import Tos from './pages/Tos';
 import About from './pages/About';
 import Allschools from './pages/Allschools';
+import School from './pages/School';
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
           }
         />
         <Route
-          path="/schools"
+          path="/allschools"
           element={
             <PrivateRoute>
               <Header />
@@ -57,6 +58,15 @@ function App() {
             <PrivateRoute>
               <Header />
               <About />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/school/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <School />
             </PrivateRoute>
           }
         />

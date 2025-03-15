@@ -13,7 +13,7 @@ const Footer = () => {
         <a href="/tos" className=" text-white">
           TOS
         </a>
-        <a href="/schools" className=" text-white">
+        <a href="/allschools" className=" text-white">
           All Schools
         </a>
         <a href="/about" className=" text-white">
