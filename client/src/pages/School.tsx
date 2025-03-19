@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 interface Form {
@@ -10,7 +10,6 @@ interface Form {
 
 const School = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<Form | null>(null);
 
   useEffect(() => {
@@ -25,10 +24,7 @@ const School = () => {
       })
       .catch(error => console.log(error));
   }, [id]);
-
-  const handleChoice = async () => {
-    // Add logic for handleChoice if necessary
-  }
+ 
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -71,37 +67,37 @@ const School = () => {
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Categories</h2>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white w-32">Athletics</button>
+            <Link to={`/athletics/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white w-32">Athletics</Link>
             <p className="ml-4 text-gray-700">Rate and review sports programs, facilities, and game experiences</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-red-500 text-white w-32">Clubs</button>
+            <Link to={`/clubs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-red-500 text-white w-32">Clubs</Link>
             <p className="ml-4 text-gray-700">Explore and rate student organizations and extracurricular activities</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white w-32">Housing</button>
+            <Link to={`/housing/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white w-32">Housing</Link>
             <p className="ml-4 text-gray-700">Reviews of on-campus residences and off-campus housing options</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-yellow-500 text-white w-32">Jobs</button>
+            <Link to={`/jobs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-yellow-500 text-white w-32">Jobs</Link>
             <p className="ml-4 text-gray-700">Information about campus employment and career opportunities</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white w-32">LifeStyles</button>
+            <Link to={`/lifestyles/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white w-32">LifeStyles</Link>
             <p className="ml-4 text-gray-700">Reviews about campus life, culture, and social experiences</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-orange-500 text-white w-32">Majors</button>
+            <Link to={`/majors/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-orange-500 text-white w-32">Majors</Link>
             <p className="ml-4 text-gray-700">Ratings and reviews of academic programs and departments</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white w-32">Other</button>
+            <Link to={`/others/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white w-32">Other</Link>
             <p className="ml-4 text-gray-700">Additional categories and miscellaneous reviews</p>
           </div>
         </div>
