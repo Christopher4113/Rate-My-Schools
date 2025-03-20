@@ -5,7 +5,6 @@ import axios from 'axios'
 interface Form {
   id: number,
   category: string,
-  school: number
 }
 
 const Athletics = () => {
