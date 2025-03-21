@@ -21,6 +21,14 @@ import Jobs from './pages/Category/Jobs';
 import LifeStyles from './pages/Category/LifeStyles';
 import Majors from './pages/Category/Majors';
 import Others from './pages/Category/Others';
+import AthleticsReview from './pages/Review/AthleticsReview';
+import ClubsReview from './pages/Review/ClubsReview';
+import HousingReview from './pages/Review/HousingReview';
+import JobsReview from './pages/Review/JobsReview';
+import LifeStylesReview from './pages/Review/LifeStylesReview';
+import MajorsReview from './pages/Review/MajorsReview';
+import OthersReview from './pages/Review/OthersReview';
+
 
 function App() {
   return (
@@ -137,6 +145,69 @@ function App() {
             <PrivateRoute>
               <Header />
               <Others />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/athleticsreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <AthleticsReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/clubsreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <ClubsReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/housingreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <HousingReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/jobsreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <JobsReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/lifestylesreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <LifeStylesReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/majorsreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <MajorsReview />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/othersreview/:id"
+          element={
+            <PrivateRoute>
+              <Header />
+              <OthersReview />
             </PrivateRoute>
           }
         />
