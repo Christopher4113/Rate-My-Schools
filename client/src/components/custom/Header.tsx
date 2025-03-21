@@ -1,30 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Option from "../ui/option";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  
+  const isDashboard = location.pathname === "/dashboard";
+  const isSchool = location.pathname === "/school";
 
   const handleLogout = () => {
-    sessionStorage.removeItem("token"); // Clear sessionStorage
-    setSidebarOpen(false)
-    navigate("/login"); // Redirect to login page
+    sessionStorage.removeItem("token");
+    setSidebarOpen(false);
+    navigate("/login");
   };
 
   const handleMenu = () => {
-    setSidebarOpen(false)
+    setSidebarOpen(false);
     navigate("/dashboard");
   };
 
   const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen); // Toggle sidebar visibility
+    setSidebarOpen(!isSidebarOpen);
   };
 
   return (
     <div
-      className="relative w-full h-16 flex items-center justify-between px-5 shadow-sm z-50 
-                 max-sm:h-14 max-sm:px-3 bg-blue-600"
+      className={`relative w-full h-16 flex items-center justify-between px-5 shadow-sm z-50 
+                 max-sm:h-14 max-sm:px-3 ${isDashboard ? "bg-blue-600" : "bg-blue-500"}`}
     >
       {/* Option Button */}
       <div className="flex items-center -mt-6 max-sm:-ml-8">
@@ -50,6 +54,7 @@ const Header = () => {
             ✖
           </button>
 
+
           {/* Logout Button */}
           <button
             onClick={handleLogout}
@@ -58,13 +63,15 @@ const Header = () => {
             Logout
           </button>
 
-          {/* Menu Button */}
-          <button
-            onClick={handleMenu}
-            className="bg-gradient-to-r from-violet-500 to-violet-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
-          >
-            Menu
-          </button>
+          {/* Menu Button - only show if not already on dashboard */}
+          {!isDashboard && (
+            <button
+              onClick={handleMenu}
+              className="bg-gradient-to-r from-violet-500 to-violet-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
+            >
+              Menu
+            </button>
+          )}
         </div>
       )}
     </div>
