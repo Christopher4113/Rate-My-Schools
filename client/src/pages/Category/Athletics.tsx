@@ -18,7 +18,7 @@ const Athletics = () => {
           console.log(response.data)
           setFormData(response.data)
          })
-         .catch((error:any) => console.error("Error fetching schools: ", error))
+         .catch((error:any) => console.error("Error fetching athletics: ", error))
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import Option from "../ui/option";
 
 const Header = () => {
@@ -19,6 +19,11 @@ const Header = () => {
   const handleMenu = () => {
     setSidebarOpen(false);
     navigate("/dashboard");
+  };
+
+  const handleGoBack = () => {
+    setSidebarOpen(false);
+    navigate(-1); // This navigates to the previous page in history
   };
 
   const toggleSidebar = () => {
@@ -54,6 +59,25 @@ const Header = () => {
             ✖
           </button>
 
+          {/* Go Back Button - only show if not on dashboard */}
+          {!isDashboard && (
+            <button
+              onClick={handleGoBack}
+              className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
+            >
+              Go Back
+            </button>
+          )}
+
+          {/* Menu Button - only show if not already on dashboard */}
+          {!isDashboard && (
+            <button
+              onClick={handleMenu}
+              className="bg-gradient-to-r from-violet-500 to-violet-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition mt-3"
+            >
+              Menu
+            </button>
+          )}
 
           {/* Logout Button */}
           <button
@@ -62,16 +86,6 @@ const Header = () => {
           >
             Logout
           </button>
-
-          {/* Menu Button - only show if not already on dashboard */}
-          {!isDashboard && (
-            <button
-              onClick={handleMenu}
-              className="bg-gradient-to-r from-violet-500 to-violet-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
-            >
-              Menu
-            </button>
-          )}
         </div>
       )}
     </div>
