@@ -15,6 +15,7 @@ const AthleticsReview = () => {
   const [formData, setFormData] = useState<Form[]>([]);
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
+  const [category, setCategory] = useState("")
 
   useEffect(() => {
     axios.get<Form[]>(`http://localhost:8080/auth/getAthleticsReview/${id}`)
@@ -41,6 +42,15 @@ const AthleticsReview = () => {
       })
       .catch(error => console.error(error));
   }, [id]);
+  
+  useEffect(() => {
+    axios.get(`http://localhost:8080/auth/getCategory/${id}`)
+         .then(response => {
+          const data = response.data;
+          setCategory(data.category)
+         })
+         .catch(error => console.log(error))
+  },[id])
 
   return (
     <div className='min-h-screen flex flex-col'>
@@ -64,7 +74,7 @@ const AthleticsReview = () => {
             color: "#FFD700",
           }}
         >
-          Student Athletics Reviews
+          Student {category} Reviews
         </h1>
         <div className="mt-3 flex items-center space-x-2 absolute bottom-1 left-4 rounded px-3 py-1"
              style={{
@@ -117,9 +127,9 @@ const AthleticsReview = () => {
           )}
         </div>
 
-        {/* Average Rating Section */}
+        
         <div className='md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col items-center'>
-  
+          
         </div>
       </div>
     </div>
