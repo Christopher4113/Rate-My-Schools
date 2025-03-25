@@ -10,12 +10,16 @@ interface Form {
   createdAt: string,
 }
 
+
+
 const AthleticsReview = () => {
   const { id } = useParams();
   const [formData, setFormData] = useState<Form[]>([]);
   const [totalReviews, setTotalReviews] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const [category, setCategory] = useState("")
+  const [rating, setRating] = useState(0);
+  const [reviewText, setReviewText] = useState(""); 
 
   useEffect(() => {
     axios.get<Form[]>(`http://localhost:8080/auth/getAthleticsReview/${id}`)
@@ -51,6 +55,25 @@ const AthleticsReview = () => {
          })
          .catch(error => console.log(error))
   },[id])
+
+  const handleSubmit = async(e:React.FormEvent) => {
+    e.preventDefault()
+    const currentDate = new Date().toISOString().split("T")[0]
+    try {
+      await axios.post("http://localhost:8080/auth/postAthleticsReview", {
+        id,
+        rating,
+        review: reviewText,
+        createdAt: currentDate, // Send current date
+      });
+
+      alert("Review submitted successfully!");
+      setRating(0);
+      setReviewText("");
+    } catch (error: any) {
+      console.error("Error submitting review:", error);
+    }
+  }
 
   return (
     <div className='min-h-screen flex flex-col'>
@@ -129,7 +152,53 @@ const AthleticsReview = () => {
 
         
         <div className='md:w-1/2 bg-white rounded-lg shadow-md p-6 flex flex-col items-center'>
-          
+        <div className="container px-4 mx-auto">
+              <div className="mx-auto">
+                <div className="max-w-md mx-auto px-8 py-6 bg-gray-100 rounded-lg shadow-lg">
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-4">Write a review</h2>
+                  <form onSubmit={handleSubmit}>
+                    {/* Star Rating */}
+                    <div className="mb-4">
+                      <label className="block text-gray-800 mb-1">Select Rating</label>
+                      <div className="flex space-x-2">
+                        {[1, 2, 3, 4, 5].map((num) => (
+                          <FaStar
+                            key={num}
+                            className={`cursor-pointer text-3xl transition ${
+                              num <= rating ? "text-yellow-400" : "text-gray-300"
+                            }`}
+                            onClick={() => setRating(num === rating ? 0 : num)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Review Textarea */}
+                    <div className="mb-4">
+                      <label className="block text-gray-800 mb-1" htmlFor="message">
+                        Enter Your Review
+                      </label>
+                      <textarea
+                        className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 transition duration-300"
+                        rows={4}
+                        placeholder="Enter your review"
+                        name="message"
+                        id="message"
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                      ></textarea>
+                    </div>  
+                    <button
+                      className="w-full bg-blue-300 text-gray-800 py-2 px-4 rounded-lg hover:bg-blue-400 transition duration-300"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
     </div>
