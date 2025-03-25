@@ -24,7 +24,11 @@ const AthleticsReview = () => {
   useEffect(() => {
     axios.get<Form[]>(`http://localhost:8080/auth/getAthleticsReview/${id}`)
       .then((response) => {
-        setFormData(response.data);
+        // Sort the data by createdAt date (newest first)
+        const sortedData = [...response.data].sort((a, b) => 
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        setFormData(sortedData);
       })
       .catch((error) => console.error("Error fetching reviews", error));
   }, [id]);
@@ -59,9 +63,10 @@ const AthleticsReview = () => {
   const handleSubmit = async(e:React.FormEvent) => {
     e.preventDefault()
     const currentDate = new Date().toISOString().split("T")[0]
+    console.log(currentDate)
     try {
       await axios.post("http://localhost:8080/auth/postAthleticsReview", {
-        id,
+        athletics: { id: Number(id) },
         rating,
         review: reviewText,
         createdAt: currentDate, // Send current date
