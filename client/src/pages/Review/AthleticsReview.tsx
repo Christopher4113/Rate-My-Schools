@@ -62,19 +62,34 @@ const AthleticsReview = () => {
 
   const handleSubmit = async(e:React.FormEvent) => {
     e.preventDefault()
-    const currentDate = new Date().toISOString().split("T")[0]
-    console.log(currentDate)
+    
+  
     try {
       await axios.post("http://localhost:8080/auth/postAthleticsReview", {
         athletics: { id: Number(id) },
         rating,
         review: reviewText,
-        createdAt: currentDate, // Send current date
-      });
 
+      });
+  
       alert("Review submitted successfully!");
       setRating(0);
       setReviewText("");
+      
+      // Refresh all data after submission
+      const reviewResponse = await axios.get<Form[]>(`http://localhost:8080/auth/getAthleticsReview/${id}`);
+      const sortedData = [...reviewResponse.data].sort((a, b) => 
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      setFormData(sortedData);
+      
+      // Refresh average rating and total reviews
+      const avgResponse = await axios.get(`http://localhost:8080/auth/getAthleticsAverageRating/${id}`);
+      setAverageRating(avgResponse.data.averageRating);
+      
+      const totalResponse = await axios.get(`http://localhost:8080/auth/getAthleticsTotalReviews/${id}`);
+      setTotalReviews(totalResponse.data.totalReviews);
+      
     } catch (error: any) {
       console.error("Error submitting review:", error);
     }
@@ -146,7 +161,11 @@ const AthleticsReview = () => {
                 </div>
                 <p className="text-lg text-gray-700 mb-2 break-words">{review.review}</p>
                 <p className="text-sm text-gray-500">
-                  Reviewed on {new Date(review.createdAt).toLocaleDateString()}
+                  Reviewed on {new Date(review.createdAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
                 </p>
               </div>
             ))
