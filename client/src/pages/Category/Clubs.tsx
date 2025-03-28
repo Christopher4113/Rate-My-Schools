@@ -57,7 +57,7 @@ const Clubs = () => {
           {formData.map((category) => (
             <div key={category.id} className="flex items-center mb-4">
               <Link
-                to={`/athleticsreview/${category.id}`} // Use the category id in the URL
+                to={`/clubsreview/${category.id}`} // Use the category id in the URL
                 className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white w-32 flex items-center justify-center text-center"
               >
                 {category.clubName} {/* Display the category name on the button */}
@@ -67,23 +67,133 @@ const Clubs = () => {
         </div>
         <div className="md:w-1/2 bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">About the University Clubs</h2>
-          
+
           <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-2 text-gray-700">Sports</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Diverse Categories</h3>
             <p className="text-gray-600 leading-relaxed">
-              Rate this section based off of the athletic programs, teams, events, and the overall atmosphere of sporting activities, which is exactly what you'd want for this category. It's focused on team sports, individual performances, and event experiences, which aligns well with the idea of rating university sports.
+              University clubs are organized into various categories to accommodate a wide range of student interests. 
+              Whether you're interested in technology, culture, sports, or community service, there's a club for everyone. 
+              These categories include Engineering, Tech, Recreational, Cultural, Spiritual, Games, Academic, and more.
             </p>
           </div>
-          
-          <div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-700">Gym (University Rec Center)</h3>
+
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Finding Your Community</h3>
             <p className="text-gray-600 leading-relaxed">
-            This rating captures the physical fitness aspect, focusing on the university’s gym, the quality of fitness equipment, cleanliness, and available amenities. It's perfect for rating the recreation center or gym, and it addresses the important components like fitness classes, equipment, and overall facilities.
+              Joining a club is a great way to meet like-minded peers, develop new skills, and contribute to meaningful 
+              projects. Clubs offer opportunities to participate in competitions, attend networking events, and engage 
+              in hands-on experiences that enhance your university journey.
+            </p>
+          </div>
+
+          {/* Engineering Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Engineering Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs focused on engineering disciplines, projects, and competitions.  
+              <strong> Examples:</strong> Robotics Club, Formula SAE, IEEE Student Branch, Civil Engineering Society.
+            </p>
+          </div>
+
+          {/* Tech Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Tech Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs centered around computer science, software development, and emerging technologies.  
+              <strong> Examples:</strong> AI Club, Cybersecurity Club, Hackathon Club, Game Development Club.
+            </p>
+          </div>
+
+          {/* Recreational Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Recreational Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs focused on hobbies, relaxation, and non-competitive activities.  
+              <strong> Examples:</strong> Photography Club, Outdoor Adventure Club, Music Club, Cooking Club.
+            </p>
+          </div>
+
+          {/* Culture Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Culture Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs that celebrate different nationalities, ethnic groups, and cultural traditions.  
+              <strong> Examples:</strong> Asian Student Association, Latin American Club, French Club, Indigenous Student Society.
+            </p>
+          </div>
+
+          {/* Spiritual Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Spiritual Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs related to faith, spirituality, and religious communities.  
+              <strong> Examples:</strong> Muslim Student Association, Christian Fellowship, Jewish Student Union.
+            </p>
+          </div>
+
+          {/* Student Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Student Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              A broad category covering general interest and student-led organizations.  
+              <strong> Examples:</strong> Debate Club, Entrepreneurship Club, Finance Club, Writing Club.
+            </p>
+          </div>
+
+          {/* Games Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Games Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs for board games, video games, and tabletop games.  
+              <strong> Examples:</strong> Chess Club, eSports Club, Dungeons & Dragons Club.
+            </p>
+          </div>
+
+          {/* Intramurals */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Intramurals</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Recreational sports teams and leagues for students.  
+              <strong> Examples:</strong> Intramural Basketball, Soccer League, Ultimate Frisbee.
+            </p>
+          </div>
+
+          {/* USC Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">USC Clubs (University Student Council Clubs)</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs that are affiliated with student government or university administration.  
+              <strong> Examples:</strong> Student Council, Campus Leadership Organizations, Event Planning Committees.
+            </p>
+          </div>
+
+          {/* Community Service */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Community Service</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs dedicated to volunteer work and social impact.  
+              <strong> Examples:</strong> Habitat for Humanity, Red Cross Club, Environmental Sustainability Club.
+            </p>
+          </div>
+
+          {/* Academic Clubs */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Academic Clubs</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Clubs that support academic disciplines, research, and professional development.  
+              <strong> Examples:</strong> Math Society, Pre-Med Club, Economics Club, Business Club.
+            </p>
+          </div>
+
+          {/* Student Government */}
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold mb-2 text-gray-700">Student Government</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Organizations involved in campus governance, policy-making, and advocacy.  
+              <strong> Examples:</strong> Student Senate, Residence Hall Association, University Governance Committees.
             </p>
           </div>
         </div>
-
-
       </div>
     </div>
   )
