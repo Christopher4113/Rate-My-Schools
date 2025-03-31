@@ -5,6 +5,7 @@ import axios from 'axios'
 interface Form {
   id: number,
   category: string,
+  description: string,
 }
 
 const Athletics = () => {
@@ -68,20 +69,12 @@ const Athletics = () => {
 
         <div className="md:w-1/2 bg-white rounded-lg shadow-md p-6">
           <h2 className="text-2xl font-bold mb-4 text-gray-800">About Athletics</h2>
-          
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-2 text-gray-700">Sports</h3>
-            <p className="text-gray-600 leading-relaxed">
-              Rate this section based off of the athletic programs, teams, events, and the overall atmosphere of sporting activities, which is exactly what you'd want for this category. It's focused on team sports, individual performances, and event experiences, which aligns well with the idea of rating university sports.
-            </p>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-700">Gym (University Rec Center)</h3>
-            <p className="text-gray-600 leading-relaxed">
-            This rating captures the physical fitness aspect, focusing on the university’s gym, the quality of fitness equipment, cleanliness, and available amenities. It's perfect for rating the recreation center or gym, and it addresses the important components like fitness classes, equipment, and overall facilities.
-            </p>
-          </div>
+          {formData.map((category) => (
+            <div key={category.id} className="mb-6">
+              <h3 className="text-xl font-semibold mb-2 text-gray-700">{category.category}</h3>
+              <p className="text-gray-600 leading-relaxed">{category.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
