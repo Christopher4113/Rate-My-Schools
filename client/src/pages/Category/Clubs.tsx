@@ -19,7 +19,7 @@ const Clubs = () => {
           console.log(response.data)
           setFormData(response.data)
          })
-         .catch((error: any) => console.error("Error fetching athletics: ", error))
+         .catch((error: any) => console.error("Error fetching clubs: ", error))
   },[])
   return (
     <div className='min-h-screen flex flex-col'>

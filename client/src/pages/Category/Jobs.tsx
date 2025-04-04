@@ -20,7 +20,7 @@ const Jobs = () => {
           console.log(response.data)
           setFormData(response.data)
          })
-         .catch((error: any) => console.error("Error fetching athletics: ", error))
+         .catch((error: any) => console.error("Error fetching jobs: ", error))
   }, [])
 
 
