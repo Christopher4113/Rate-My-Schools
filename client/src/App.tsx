@@ -36,179 +36,197 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/landing" />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/login" element={
+          <div>
+            <Header />
+            <Login />
+          </div>
+          }  
+        />
+        <Route path="/signup" element={
+          <div>
+            <Header />
+            <Signup />
+          </div>
+          }  
+        />
+        <Route path="/forgot" element={
+          <div>
+            <Header />
+            <Forgot />
+          </div>
+          }  
+        />
         <Route
           path="/dashboard"
           element={
-            <PrivateRoute>
+          <div>
               <Header />
               <Dashboard />
               <Footer />
-            </PrivateRoute>
+          </div>
           }
         />
         <Route
           path="/tos"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Tos/>
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/allschools"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Allschools />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/about"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <About />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/school/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <School />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/athletics/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Athletics />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/clubs/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Clubs />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/housing/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Housing />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/jobs/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Jobs />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/lifestyles/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <LifeStyles />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/majors/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Majors />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/others/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <Others />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/athleticsreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <AthleticsReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/clubsreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <ClubsReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/housingreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <HousingReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/jobsreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <JobsReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/lifestylesreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <LifeStylesReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/majorsreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <MajorsReview />
-            </PrivateRoute>
+            </div>
           }
         />
         <Route
           path="/othersreview/:id"
           element={
-            <PrivateRoute>
+            <div>
               <Header />
               <OthersReview />
-            </PrivateRoute>
+            </div>
           }
         />
         

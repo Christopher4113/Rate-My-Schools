@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation, Link} from "react-router-dom";
 import Option from "../ui/option";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  
+  const token = sessionStorage.getItem('token');
   const isDashboard = location.pathname === "/dashboard";
-  const isSchool = location.pathname === "/school";
+  const login = location.pathname === "/login";
+  const signup = location.pathname === "/signup";
+  const forgot = location.pathname === "/forgot";
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     setSidebarOpen(false);
-    navigate("/login");
+    navigate("/dashboard");
   };
 
   const handleMenu = () => {
@@ -60,7 +62,7 @@ const Header = () => {
           </button>
 
           {/* Go Back Button - only show if not on dashboard */}
-          {!isDashboard && (
+          {!isDashboard || !login || !signup || !forgot &&  (
             <button
               onClick={handleGoBack}
               className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
@@ -80,12 +82,24 @@ const Header = () => {
           )}
 
           {/* Logout Button */}
-          <button
+          {token && (
+            <button
             onClick={handleLogout}
             className="bg-gradient-to-r from-red-500 to-red-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition"
-          >
-            Logout
-          </button>
+            >
+              Logout
+            </button>
+          )}
+          {!token && (
+            <Link to="/login" className=" text-white bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
+              Login
+            </Link>
+          )}
+          {!token && (
+            <Link to="/signup" className="text-white bg-gradient-to-r from-green-500 to-green-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
+              Register
+            </Link>
+          )}
         </div>
       )}
     </div>
