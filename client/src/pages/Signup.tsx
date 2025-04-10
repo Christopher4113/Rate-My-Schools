@@ -50,10 +50,6 @@ const Signup = () => {
     }
   };
 
-  // Add the handleGoogleSignup function
-  const handleGoogleSignup = async () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
-  };
 
 
 
@@ -123,15 +119,6 @@ const Signup = () => {
                   value={confirm}
                   onChange={onConfirmChange}
                 />
-              </div>
-              <div className="mt-5">
-                <button
-                  type="button"
-                  className="w-full bg-purple-500 py-3 text-center text-white"
-                  onClick={handleGoogleSignup}
-                >
-                  Continue with Google
-                </button>
               </div>
               <div className="mt-5">
                 <button
