@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link} from "react-router-dom";
 import Option from "../ui/option";
+import {jwtDecode} from "jwt-decode";
+
+interface JwtPayload {
+  sub: string; // usually the email or username
+  exp: number;
+  isAdmin?: boolean;
+}
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,6 +18,15 @@ const Header = () => {
   const login = location.pathname === "/login";
   const signup = location.pathname === "/signup";
   const forgot = location.pathname === "/forgot";
+  let isAdmin: boolean = false;
+  if (token) {
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
+      isAdmin = decoded.isAdmin ?? false;
+    } catch (err) {
+      console.error("Invalid token", err);
+    }
+  }
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -98,6 +114,14 @@ const Header = () => {
           {!token && (
             <Link to="/signup" className="text-white bg-gradient-to-r from-green-500 to-green-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
               Register
+            </Link>
+          )}
+          {token && isAdmin && (
+            <Link
+              to="/admin"
+              className="text-white bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
+            >
+              Admin
             </Link>
           )}
         </div>
