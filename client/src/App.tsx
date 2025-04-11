@@ -28,6 +28,8 @@ import JobsReview from './pages/Review/JobsReview';
 import LifeStylesReview from './pages/Review/LifeStylesReview';
 import MajorsReview from './pages/Review/MajorsReview';
 import OthersReview from './pages/Review/OthersReview';
+import Admin from './pages/Admin';
+import AdminRoute from './AdminRoute';
 
 
 function App() {
@@ -232,6 +234,18 @@ function App() {
         
         <Route path="/verify" element={<Verify />} />
         <Route path="/change" element={<Change />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <Admin/>
+              </AdminRoute> 
+            </PrivateRoute>
+          }
+        />
+  
       </Routes>
     </BrowserRouter>
   );

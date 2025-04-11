@@ -116,7 +116,7 @@ const Header = () => {
               Register
             </Link>
           )}
-          {token && isAdmin && (
+          {token && isAdmin && isDashboard&& (
             <Link
               to="/admin"
               className="text-white bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
