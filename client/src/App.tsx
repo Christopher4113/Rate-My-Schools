@@ -31,6 +31,7 @@ import OthersReview from './pages/Review/OthersReview';
 import Admin from './pages/Admin/Admin';
 import AdminRoute from './AdminRoute';
 import AdminSchool from './pages/Admin/AdminSchool';
+import Select from './pages/Admin/Select';
 
 
 function App() {
@@ -256,7 +257,17 @@ function App() {
             </PrivateRoute>
           }
         />
-  
+        <Route
+          path="/select/:id"
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <Select />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

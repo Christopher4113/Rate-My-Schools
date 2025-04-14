@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 interface School {
@@ -145,7 +146,9 @@ const AdminSchool = () => {
           {schools.map((school) => (
             <tr key={school.id}>
               <td className="border px-4 py-2">{school.id}</td>
-              <td className="border px-4 py-2">{school.schoolName}</td>
+              <td className="border px-4 py-2 text-blue-600 underline cursor-pointer">
+                <Link to={`/select/${school.id}`}>{school.schoolName}</Link>
+              </td>
               <td className="border px-4 py-2 flex gap-2">
                 <button
                   onClick={() => handleEdit(school.id)}
