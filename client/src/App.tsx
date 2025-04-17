@@ -32,6 +32,20 @@ import Admin from './pages/Admin/Admin';
 import AdminRoute from './AdminRoute';
 import AdminSchool from './pages/Admin/AdminSchool';
 import Select from './pages/Admin/Select';
+import AA from './pages/Admin/AA';
+import AC from './pages/Admin/AC';
+import AH from './pages/Admin/AH';
+import AJ from './pages/Admin/AJ';
+import AL from './pages/Admin/AL';
+import AM from './pages/Admin/AM';
+import AO from './pages/Admin/AO';
+import AAR from './pages/Admin/AAR';
+import ACR from './pages/Admin/ACR';
+import AHR from './pages/Admin/AHR';
+import AJR from './pages/Admin/AJR';
+import ALR from './pages/Admin/ALR';
+import AMR from './pages/Admin/AMR';
+import AOR from './pages/Admin/AOR';
 
 
 function App() {
@@ -268,6 +282,162 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path='/AA/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AA />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AC/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AC />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AH/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AH />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AJ/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AJ />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AL/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AL />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AM/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AM />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AO/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AO />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path='/AAR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AAR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/ACR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <ACR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AHR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AHR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AJR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AJR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/ALR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <ALR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AMR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AMR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/AOR/:id'
+          element={
+            <PrivateRoute>
+              <AdminRoute>
+                <Header />
+                <AOR />
+              </AdminRoute>
+            </PrivateRoute>
+          }
+        />
+        
       </Routes>
     </BrowserRouter>
   );
