@@ -106,6 +106,11 @@ const Header = () => {
               Logout
             </button>
           )}
+          {token && (
+            <Link to="/profile" className="text-white bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
+              Profile
+            </Link>
+          )}
           {!token && (
             <Link to="/login" className=" text-white bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
               Login

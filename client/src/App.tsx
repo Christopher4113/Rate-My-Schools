@@ -46,7 +46,7 @@ import AJR from './pages/Admin/AJR';
 import ALR from './pages/Admin/ALR';
 import AMR from './pages/Admin/AMR';
 import AOR from './pages/Admin/AOR';
-
+import Profile from './pages/User/Profile';
 
 function App() {
   return (
@@ -437,7 +437,16 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path='/profile'
+          element={
+            <PrivateRoute>
+                <Header />
+                <Profile />
+            </PrivateRoute>
+          }
         
+        />
       </Routes>
     </BrowserRouter>
   );
