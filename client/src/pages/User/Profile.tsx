@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
@@ -8,18 +8,54 @@ interface JwtPayload {
   userId?: number;
 }
 
-const Profile = () => {
-  const token = sessionStorage.getItem('token');
-  let userId: number = 0;
+interface GetProfileDto {
+  location: string;
+  major: string;
+  academicLevel: string;
+  campusSetting: string;
+  finance: string;
+  goals: string;
+  living: string;
+  personal: string;
+}
+interface School {
+  id: number;
+  schoolName: string;
+  description: string;
+  location: string;
+}
 
-  if (token) {
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      userId = decoded.userId ?? 0;
-    } catch (error) {
-      console.error("Invalid token", error);
+const Profile = () => {
+  const [schools, setSchools] = useState<School[]>([]);
+  const [profile, setProfile] = useState<GetProfileDto | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const token = sessionStorage.getItem('token');
+
+  const [userId, setUserId] = useState<number>(0);
+
+  const fetchSchools = () => {
+    axios
+      .get(`http://localhost:8080/auth/schools`)
+      .then((res) => setSchools(res.data))
+      .catch((err) => console.error('Error detching schools: ', err))
+  };
+
+  useEffect(() => {
+    fetchSchools();
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        if (decoded.userId) {
+          setUserId(decoded.userId);
+        }
+      } catch (err) {
+        console.error("Invalid token", err);
+      }
     }
-  }
+  }, [token]);
 
   const [formData, setFormData] = useState({
     location: '',
@@ -30,19 +66,35 @@ const Profile = () => {
     goals: '',
     living: '',
     personal: '',
-    userId: userId,
+    userId: 0,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const fetchProfile = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/auth/getProfile/${userId}`);
+      setProfile(response.data);
+    } catch (err) {
+      setError("Failed to fetch profile. Please try again.");
+      console.error(err);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/auth/postProfile', formData);
+      await axios.post('http://localhost:8080/auth/postProfile', {
+        ...formData,
+        userId: userId,
+      });
       alert("Profile created successfully!");
+      fetchProfile();
     } catch (err) {
       console.error("Error creating profile:", err);
       alert("Failed to save profile.");
@@ -61,55 +113,109 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    if (userId !== 0) {
+      fetchProfile();
+    }
+  }, [userId]);
+
   return (
-    <div className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-2xl shadow-lg border border-gray-200">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">🎓 Create Your University Profile</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Preferred Location</label>
-          <input name="location" value={formData.location} onChange={handleChange} placeholder="e.g., California, Ontario" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+    <div>
+      {/* Profile Form */}
+      <div className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-2xl shadow-lg border border-gray-200">
+        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">🎓 Create Your University Profile</h2>
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6">
+          {[
+            { label: 'Preferred Location', name: 'location', placeholder: 'e.g., Quebec, Ontario' },
+            { label: 'Preferred Major', name: 'major', placeholder: 'e.g., Computer Science' },
+            { label: 'Academic Level', name: 'academicLevel', placeholder: 'e.g., Undergraduate, Masters' },
+            { label: 'Campus Setting', name: 'campusSetting', placeholder: 'e.g., Urban, Suburban, Rural' },
+            { label: 'Financial Considerations', name: 'finance', placeholder: 'e.g., Budget, Scholarships, Work-Study' },
+            { label: 'Living Preference', name: 'living', placeholder: 'e.g., On-campus dorm, apartment, commute from home' },
+          ].map(field => (
+            <div key={field.name}>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">{field.label}</label>
+              <input
+                name={field.name}
+                value={(formData as any)[field.name]}
+                onChange={handleChange}
+                placeholder={field.placeholder}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            </div>
+          ))}
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Preferred Major</label>
-          <input name="major" value={formData.major} onChange={handleChange} placeholder="e.g., Computer Science" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Academic or Career Goals</label>
+            <textarea
+              name="goals"
+              value={formData.goals}
+              onChange={handleChange}
+              placeholder="e.g., Become a researcher, work in Silicon Valley"
+              rows={3}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Academic Level</label>
-          <input name="academicLevel" value={formData.academicLevel} onChange={handleChange} placeholder="e.g., Undergraduate, Masters" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Personal Preferences / Notes</label>
+            <textarea
+              name="personal"
+              value={formData.personal}
+              onChange={handleChange}
+              placeholder="e.g., I prefer smaller class sizes, I need disability accommodations, I love partying, I love school clubs..."
+              rows={3}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Campus Setting</label>
-          <input name="campusSetting" value={formData.campusSetting} onChange={handleChange} placeholder="e.g., Urban, Suburban, Rural" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+          <button
+            type="submit"
+            className="w-full mt-4 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            🚀 Submit Profile
+          </button>
+        </form>
+      </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Financial Considerations</label>
-          <input name="finance" value={formData.finance} onChange={handleChange} placeholder="e.g., Budget, Scholarships, Work-Study" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+      {/* Display Profile */}
+      {profile && (
+        <div className="max-w-2xl mx-auto mt-10 p-8 bg-white rounded-2xl shadow-md border border-gray-200">
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 flex items-center justify-center gap-2">
+            <span className="text-purple-700 text-4xl">👤</span>
+            Your University Profile
+          </h2>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Academic or Career Goals</label>
-          <textarea name="goals" value={formData.goals} onChange={handleChange} placeholder="e.g., Become a researcher, work in Silicon Valley" rows={3} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-gray-700 text-[15px]">
+            <div className="font-semibold">Preferred Location:</div>
+            <div>{profile.location}</div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Living Preference</label>
-          <input name="living" value={formData.living} onChange={handleChange} placeholder="e.g., On-campus dorm, apartment, commute from home" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+            <div className="font-semibold">Preferred Major:</div>
+            <div>{profile.major}</div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1">Personal Preferences / Notes</label>
-          <textarea name="personal" value={formData.personal} onChange={handleChange} placeholder="e.g., I prefer smaller class sizes, I need disability accommodations..." rows={3} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
-        </div>
+            <div className="font-semibold">Academic Level:</div>
+            <div>{profile.academicLevel}</div>
 
-        <button type="submit" className="w-full mt-4 bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200">
-          🚀 Submit Profile
-        </button>
-      </form>
-      
+            <div className="font-semibold">Campus Setting:</div>
+            <div>{profile.campusSetting}</div>
+
+            <div className="font-semibold">Financial Considerations:</div>
+            <div>{profile.finance}</div>
+
+            <div className="font-semibold">Goals:</div>
+            <div className="whitespace-pre-line">{profile.goals}</div>
+
+            <div className="font-semibold">Living Preferences:</div>
+            <div>{profile.living}</div>
+
+            <div className="font-semibold">Personal Notes:</div>
+            <div className="whitespace-pre-line">{profile.personal}</div>
+          </div>
+        </div>
+      )}
+
+      {/* Error message */}
+      {error && <div className="text-red-600 font-medium text-center mt-4">{error}</div>}
     </div>
   );
 };
