@@ -23,12 +23,7 @@ const FeatureList: React.FC = () => {
       text: "Check out our leaderboard and see where each school ranks",
       img: "/public/leaderboard.png",
       alt: "Leaderboard",
-    },
-    {
-      text: "Chat and discuss with others about a school you're interested in",
-      img: "/public/chat.png",
-      alt: "Chat",
-    },
+    }
   ];
 
   return (

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
+
 interface JwtPayload {
   sub: string;
   exp: number;
@@ -26,6 +27,9 @@ interface School {
 }
 
 const Profile = () => {
+  const [recommendedSchool, setRecommendedSchool] = useState<string | null>(null);
+  const [isLoadingRecommendation, setIsLoadingRecommendation] = useState(false);
+
   const [schools, setSchools] = useState<School[]>([]);
   const [profile, setProfile] = useState<GetProfileDto | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -118,6 +122,29 @@ const Profile = () => {
       fetchProfile();
     }
   }, [userId]);
+
+  const generateSchoolRecommendation = async () => {
+    if (!profile || schools.length === 0) return;
+  
+    setIsLoadingRecommendation(true);
+    setRecommendedSchool(null);
+  
+    try {
+      const response = await axios.post("http://localhost:8080/auth/recommendSchool", {
+        profile,
+        schools,
+      });
+  
+      const recommendation = response.data?.trim();
+      setRecommendedSchool(recommendation ?? "No recommendation received.");
+    } catch (err) {
+      console.error("Error getting recommendation:", err);
+      setRecommendedSchool("❌ Failed to get a recommendation. Please try again.");
+    } finally {
+      setIsLoadingRecommendation(false);
+    }
+  };
+  
 
   return (
     <div>
@@ -216,6 +243,28 @@ const Profile = () => {
 
       {/* Error message */}
       {error && <div className="text-red-600 font-medium text-center mt-4">{error}</div>}
+
+      <div className="max-w-2xl mx-auto mt-10 p-8 bg-white rounded-2xl shadow-md border border-gray-200">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">🔍 Find Your Best Match</h2>
+        <p className="text-gray-600 text-center mb-6">Based on your profile and preferences, we will recommend a school that fits you best.</p>
+        
+        <div className="flex justify-center">
+          <button
+            onClick={generateSchoolRecommendation}
+            disabled={isLoadingRecommendation}
+            className="bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-200 disabled:opacity-50"
+          >
+            {isLoadingRecommendation ? "Finding best match..." : "🎯 Recommend Me a School"}
+          </button>
+        </div>
+
+        {recommendedSchool && (
+          <div className="mt-6 text-center text-lg font-medium text-blue-700">
+            🏆 The school we recommend is: <span className="font-bold">{recommendedSchool}</span>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };
