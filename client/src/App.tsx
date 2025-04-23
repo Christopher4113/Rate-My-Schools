@@ -47,7 +47,7 @@ import ALR from './pages/Admin/ALR';
 import AMR from './pages/Admin/AMR';
 import AOR from './pages/Admin/AOR';
 import Profile from './pages/User/Profile';
-
+import Leaderboard from './pages/Leaderboard';
 function App() {
   return (
     <BrowserRouter>
@@ -444,6 +444,15 @@ function App() {
                 <Header />
                 <Profile />
             </PrivateRoute>
+          }
+        />
+        <Route 
+          path='/leaderboard'
+          element={
+            <div>
+              <Header />
+              <Leaderboard />
+            </div>
           }
         
         />

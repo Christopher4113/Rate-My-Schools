@@ -18,6 +18,7 @@ const Header = () => {
   const login = location.pathname === "/login";
   const signup = location.pathname === "/signup";
   const forgot = location.pathname === "/forgot";
+  const leaderboard = location.pathname === "/leaderboard";
   let isAdmin: boolean = false;
   if (token) {
     try {
@@ -87,6 +88,7 @@ const Header = () => {
             </button>
           )}
 
+
           {/* Menu Button - only show if not already on dashboard */}
           {!isDashboard && (
             <button
@@ -129,6 +131,14 @@ const Header = () => {
               Admin
             </Link>
           )}
+        {!leaderboard && (
+          <Link
+          to='/leaderboard'
+          className="text-white bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
+          >
+            LeaderBoard
+          </Link>
+        )}
         </div>
       )}
     </div>
