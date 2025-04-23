@@ -10,12 +10,13 @@ interface ClubReview {
 }
 
 const ACR = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [reviews, setReviews] = useState<ClubReview[]>([]);
 
   const fetchReviews = () => {
     axios
-      .get(`http://localhost:8080/auth/getClubsReview/${id}`)
+      .get(`${serverURL}/auth/getClubsReview/${id}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error('Error fetching reviews:', err));
   };
@@ -26,7 +27,7 @@ const ACR = () => {
 
   const handleDelete = (reviewId: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteClubsReview/${reviewId}`)
+      .delete(`${serverURL}/auth/deleteClubsReview/${reviewId}`)
       .then(() => {
         setReviews((prev) => prev.filter((r) => r.id !== reviewId));
       })

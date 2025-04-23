@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AA = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [athleticsList, setAthleticsList] = useState<Athletics[]>([]);
@@ -24,7 +25,7 @@ const AA = () => {
 
   const fetchAthletics = () => {
     axios
-      .get(`http://localhost:8080/auth/getAthletics/${schoolId}`)
+      .get(`${serverURL}/auth/getAthletics/${schoolId}`)
       .then((res) => setAthleticsList(res.data))
       .catch((err) => console.error('Error fetching athletics:', err));
   };
@@ -42,13 +43,13 @@ const AA = () => {
       };
 
       if (isUpdating && selectedAthleticsId !== null) {
-        await axios.put('http://localhost:8080/auth/updateAthletics', {
+        await axios.put(`${serverURL}/auth/updateAthletics`, {
           id: selectedAthleticsId,
           ...payload,
         });
         alert('Athletics updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postAthletics', payload);
+        await axios.post(`${serverURL}/auth/postAthletics`, payload);
         alert('Athletics added!');
       }
 
@@ -61,7 +62,7 @@ const AA = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteAthletics/${id}`)
+      .delete(`${serverURL}/auth/deleteAthletics/${id}`)
       .then(() => fetchAthletics())
       .catch((error) => console.error('Delete failed:', error));
   };

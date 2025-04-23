@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL
 
   const [user, setUser] = useState({
     username: "",
@@ -29,7 +30,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8080/auth/signup", user);
+      const response = await axios.post(`${serverURL}/auth/signup`, user);
       console.log("Signup success", response.data);
       alert("Check your email to verify your account");
       navigate(`/verify?email=${encodeURIComponent(email)}`);

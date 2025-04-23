@@ -7,10 +7,11 @@ interface School {
 }
 
 const AllSchools = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [schools, setSchools] = useState<School[]>([]);
 
   useEffect(() => {
-    axios.get<School[]>('http://localhost:8080/auth/schools')
+    axios.get<School[]>(`${serverURL}/auth/schools`)
       .then((response) => {
         setSchools(response.data);
       })

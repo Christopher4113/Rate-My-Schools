@@ -27,6 +27,7 @@ interface School {
 }
 
 const Profile = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [recommendedSchool, setRecommendedSchool] = useState<string | null>(null);
   const [isLoadingRecommendation, setIsLoadingRecommendation] = useState(false);
 
@@ -39,7 +40,7 @@ const Profile = () => {
 
   const fetchSchools = () => {
     axios
-      .get(`http://localhost:8080/auth/schools`)
+      .get(`${serverURL}/auth/schools`)
       .then((res) => setSchools(res.data))
       .catch((err) => console.error('Error detching schools: ', err))
   };
@@ -82,7 +83,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/auth/getProfile/${userId}`);
+      const response = await axios.get(`${serverURL}/auth/getProfile/${userId}`);
       setProfile(response.data);
     } catch (err) {
       setError("Failed to fetch profile. Please try again.");
@@ -93,7 +94,7 @@ const Profile = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/auth/postProfile', {
+      await axios.post(`${serverURL}/auth/postProfile`, {
         ...formData,
         userId: userId,
       });
@@ -130,7 +131,7 @@ const Profile = () => {
     setRecommendedSchool(null);
   
     try {
-      const response = await axios.post("http://localhost:8080/auth/recommendSchool", {
+      const response = await axios.post(`${serverURL}/auth/recommendSchool`, {
         profile,
         schools,
       });

@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AM = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [majorsList, setMajorsList] = useState<Major[]>([]);
@@ -24,7 +25,7 @@ const AM = () => {
 
   const fetchMajors = () => {
     axios
-      .get(`http://localhost:8080/auth/getMajors/${schoolId}`)
+      .get(`${serverURL}/auth/getMajors/${schoolId}`)
       .then((res) => setMajorsList(res.data))
       .catch((err) => console.error('Error fetching majors:', err));
   };
@@ -42,13 +43,13 @@ const AM = () => {
       };
 
       if (isUpdating && selectedMajorId !== null) {
-        await axios.put('http://localhost:8080/auth/updateMajors', {
+        await axios.put(`${serverURL}/auth/updateMajors`, {
           id: selectedMajorId,
           ...payload,
         });
         alert('Major updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postMajors', payload);
+        await axios.post(`${serverURL}/auth/postMajors`, payload);
         alert('Major added!');
       }
 
@@ -61,7 +62,7 @@ const AM = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteMajors/${id}`)
+      .delete(`${serverURL}/auth/deleteMajors/${id}`)
       .then(() => fetchMajors())
       .catch((error) => console.error('Delete failed:', error));
   };

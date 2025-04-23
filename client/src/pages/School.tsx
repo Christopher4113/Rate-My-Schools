@@ -9,11 +9,12 @@ interface Form {
 }
 
 const School = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [formData, setFormData] = useState<Form | null>(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getSchool/${id}`)
+    axios.get(`${serverURL}/auth/getSchool/${id}`)
       .then(result => {
         const data = result.data;
         setFormData({

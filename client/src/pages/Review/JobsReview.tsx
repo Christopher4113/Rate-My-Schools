@@ -12,6 +12,7 @@ interface Form {
 
 
 const JobsReview = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [formData,setFormData] = useState<Form[]>([]);
   const [totalReviews, setTotalReviews] = useState(0);
@@ -21,7 +22,7 @@ const JobsReview = () => {
   const [reviewText, setReviewText] = useState("");
 
   useEffect(() => {
-    axios.get<Form[]>(`http://localhost:8080/auth/getJobsReview/${id}`)
+    axios.get<Form[]>(`${serverURL}/auth/getJobsReview/${id}`)
       .then((response) => {
         // Sort the data by createdAt date (newest first)
         const sortedData = [...response.data].sort((a, b) => 
@@ -33,7 +34,7 @@ const JobsReview = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getJobsAverageRating/${id}`)
+    axios.get(`${serverURL}/auth/getJobsAverageRating/${id}`)
       .then(response => {
         const data = response.data;
         setAverageRating(data.averageRating);
@@ -42,7 +43,7 @@ const JobsReview = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getJobsTotalReviews/${id}`)
+    axios.get(`${serverURL}/auth/getJobsTotalReviews/${id}`)
       .then(response => {
         const data = response.data;
         setTotalReviews(data.totalReviews);
@@ -51,7 +52,7 @@ const JobsReview = () => {
   }, [id]);
   
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getJobsCategory/${id}`)
+    axios.get(`${serverURL}/auth/getJobsCategory/${id}`)
          .then(response => {
           const data = response.data;
           setCategory(data.clubName)
@@ -64,7 +65,7 @@ const JobsReview = () => {
     
   
     try {
-      await axios.post("http://localhost:8080/auth/postJobsReview", {
+      await axios.post(`${serverURL}/auth/postJobsReview`, {
         jobs: { id: Number(id) },
         rating,
         review: reviewText,
@@ -76,17 +77,17 @@ const JobsReview = () => {
       setReviewText("");
       
       // Refresh all data after submission
-      const reviewResponse = await axios.get<Form[]>(`http://localhost:8080/auth/getJobsReview/${id}`);
+      const reviewResponse = await axios.get<Form[]>(`${serverURL}/auth/getJobsReview/${id}`);
       const sortedData = [...reviewResponse.data].sort((a, b) => 
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setFormData(sortedData);
       
       // Refresh average rating and total reviews
-      const avgResponse = await axios.get(`http://localhost:8080/auth/getJobsAverageRating/${id}`);
+      const avgResponse = await axios.get(`${serverURL}/auth/getJobsAverageRating/${id}`);
       setAverageRating(avgResponse.data.averageRating);
       
-      const totalResponse = await axios.get(`http://localhost:8080/auth/getJobsTotalReviews/${id}`);
+      const totalResponse = await axios.get(`${serverURL}/auth/getJobsTotalReviews/${id}`);
       setTotalReviews(totalResponse.data.totalReviews);
       
     } catch (error: any) {

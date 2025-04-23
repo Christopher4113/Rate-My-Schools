@@ -10,12 +10,13 @@ interface HousingReview {
 }
 
 const AHR = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [reviews, setReviews] = useState<HousingReview[]>([]);
 
   const fetchReviews = () => {
     axios
-      .get(`http://localhost:8080/auth/getHousingReview/${id}`)
+      .get(`${serverURL}/auth/getHousingReview/${id}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error('Error fetching reviews:', err));
   };
@@ -26,7 +27,7 @@ const AHR = () => {
 
   const handleDelete = (reviewId: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteHousingReview/${reviewId}`)
+      .delete(`${serverURL}/auth/deleteHousingReview/${reviewId}`)
       .then(() => {
         setReviews((prev) => prev.filter((r) => r.id !== reviewId));
       })

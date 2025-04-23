@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AJ = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [jobsList, setJobsList] = useState<Job[]>([]);
@@ -24,7 +25,7 @@ const AJ = () => {
 
   const fetchJobs = () => {
     axios
-      .get(`http://localhost:8080/auth/getJobs/${schoolId}`)
+      .get(`${serverURL}/auth/getJobs/${schoolId}`)
       .then((res) => setJobsList(res.data))
       .catch((err) => console.error('Error fetching jobs:', err));
   };
@@ -42,13 +43,13 @@ const AJ = () => {
       };
 
       if (isUpdating && selectedJobId !== null) {
-        await axios.put('http://localhost:8080/auth/updateJobs', {
+        await axios.put(`${serverURL}/auth/updateJobs`, {
           id: selectedJobId,
           ...payload,
         });
         alert('Job updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postJobs', payload);
+        await axios.post(`${serverURL}/auth/postJobs`, payload);
         alert('Job added!');
       }
 
@@ -61,7 +62,7 @@ const AJ = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteJobs/${id}`)
+      .delete(`${serverURL}/auth/deleteJobs/${id}`)
       .then(() => fetchJobs())
       .catch((error) => console.error('Delete failed:', error));
   };

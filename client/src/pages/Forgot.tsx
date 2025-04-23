@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 const Forgot = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [user,setUser] = useState({
     email: "",
     newPassword: ""
@@ -24,7 +25,7 @@ const Forgot = () => {
       return
     }
     try {
-      const response = await axios.post("http://localhost:8080/auth/forgotPassword", { email })
+      const response = await axios.post(`${serverURL}/auth/forgotPassword`, { email })
       console.log("Forgot was a success" + response.data)
       alert("Check your email to change your password")
       navigate(`/change?email=${encodeURIComponent(email)}&newPassword=${encodeURIComponent(newPassword)}`);

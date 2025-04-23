@@ -10,12 +10,13 @@ interface OtherReview {
 }
 
 const AOR = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [reviews, setReviews] = useState<OtherReview[]>([]);
 
   const fetchReviews = () => {
     axios
-      .get(`http://localhost:8080/auth/getOthersReview/${id}`)
+      .get(`${serverURL}/auth/getOthersReview/${id}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error('Error fetching reviews:', err));
   };
@@ -26,7 +27,7 @@ const AOR = () => {
 
   const handleDelete = (reviewId: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteOthersReview/${reviewId}`)
+      .delete(`${serverURL}/auth/deleteOthersReview/${reviewId}`)
       .then(() => {
         setReviews((prev) => prev.filter((r) => r.id !== reviewId));
       })

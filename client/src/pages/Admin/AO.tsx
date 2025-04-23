@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AO = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [othersList, setOthersList] = useState<Other[]>([]);
@@ -24,7 +25,7 @@ const AO = () => {
 
   const fetchOthers = () => {
     axios
-      .get(`http://localhost:8080/auth/getOthers/${schoolId}`)
+      .get(`${serverURL}/auth/getOthers/${schoolId}`)
       .then((res) => setOthersList(res.data))
       .catch((err) => console.error('Error fetching others:', err));
   };
@@ -42,13 +43,13 @@ const AO = () => {
       };
 
       if (isUpdating && selectedOtherId !== null) {
-        await axios.put('http://localhost:8080/auth/updateOthers', {
+        await axios.put(`${serverURL}/auth/updateOthers`, {
           id: selectedOtherId,
           ...payload,
         });
         alert('Other updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postOthers', payload);
+        await axios.post(`${serverURL}/auth/postOthers`, payload);
         alert('Other added!');
       }
 
@@ -61,7 +62,7 @@ const AO = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteOthers/${id}`)
+      .delete(`${serverURL}/auth/deleteOthers/${id}`)
       .then(() => fetchOthers())
       .catch((error) => console.error('Delete failed:', error));
   };

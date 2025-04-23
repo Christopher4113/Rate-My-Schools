@@ -11,6 +11,7 @@ interface Form {
 }
 
 const HousingReview = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [formData,setFormData] = useState<Form[]>([]);
   const [totalReviews, setTotalReviews] = useState(0);
@@ -19,7 +20,7 @@ const HousingReview = () => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("")
   useEffect(() => {
-    axios.get<Form[]>(`http://localhost:8080/auth/getHousingReview/${id}`)
+    axios.get<Form[]>(`${serverURL}/auth/getHousingReview/${id}`)
          .then((response) => {
           const sortedData = [...response.data].sort((a,b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -29,7 +30,7 @@ const HousingReview = () => {
          .catch((error: any) => console.error("Error fetching reviews", error))
   },[id])
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getHousingAverageRating/${id}`)
+    axios.get(`${serverURL}/auth/getHousingAverageRating/${id}`)
       .then(response => {
         const data = response.data;
         setAverageRating(data.averageRating);
@@ -38,7 +39,7 @@ const HousingReview = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getHousingTotalReviews/${id}`)
+    axios.get(`${serverURL}/auth/getHousingTotalReviews/${id}`)
       .then(response => {
         const data = response.data;
         setTotalReviews(data.totalReviews);
@@ -46,7 +47,7 @@ const HousingReview = () => {
       .catch(error => console.error(error));
   }, [id]);
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getHousingType/${id}`)
+    axios.get(`${serverURL}/auth/getHousingType/${id}`)
          .then(response => {
           const data = response.data;
           setCategory(data.clubName)
@@ -58,7 +59,7 @@ const HousingReview = () => {
     
   
     try {
-      await axios.post("http://localhost:8080/auth/postHousingReview", {
+      await axios.post(`${serverURL}/auth/postHousingReview`, {
         housing: { id: Number(id) },
         rating,
         review: reviewText,
@@ -70,17 +71,17 @@ const HousingReview = () => {
       setReviewText("");
       
       // Refresh all data after submission
-      const reviewResponse = await axios.get<Form[]>(`http://localhost:8080/auth/getHousingReview/${id}`);
+      const reviewResponse = await axios.get<Form[]>(`${serverURL}/auth/getHousingReview/${id}`);
       const sortedData = [...reviewResponse.data].sort((a, b) => 
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setFormData(sortedData);
       
       // Refresh average rating and total reviews
-      const avgResponse = await axios.get(`http://localhost:8080/auth/getHousingAverageRating/${id}`);
+      const avgResponse = await axios.get(`${serverURL}/auth/getHousingAverageRating/${id}`);
       setAverageRating(avgResponse.data.averageRating);
       
-      const totalResponse = await axios.get(`http://localhost:8080/auth/getHousingTotalReviews/${id}`);
+      const totalResponse = await axios.get(`${serverURL}/auth/getHousingTotalReviews/${id}`);
       setTotalReviews(totalResponse.data.totalReviews);
       
     } catch (error: any) {

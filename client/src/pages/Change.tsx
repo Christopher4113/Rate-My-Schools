@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import {useNavigate,useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 const Change = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
     const [forgotCode, setForgotCode] = useState("");
     const [email, setEmail] = useState("");
     const [newPassword,setNewPassword] = useState("");
@@ -29,7 +30,7 @@ const Change = () => {
         console.log(email);
         console.log(newPassword);
         try {
-            const response = await axios.post("http://localhost:8080/auth/resetPassword", {
+            const response = await axios.post(`${serverURL}/auth/resetPassword`, {
                 email,
                 forgotCode,
                 newPassword
@@ -52,7 +53,7 @@ const Change = () => {
     const resendCode = async (e:any) => {
         e.preventDefault();
         try {
-          const response = await axios.post(`http://localhost:8080/auth/resendForgot?email=${encodeURIComponent(email)}`, null);
+          const response = await axios.post(`${serverURL}/auth/resendForgot?email=${encodeURIComponent(email)}`, null);
           console.log("Resend Sucessful" + response.data);
           alert("Resend Successful Check Email");
         } catch (error: any) {

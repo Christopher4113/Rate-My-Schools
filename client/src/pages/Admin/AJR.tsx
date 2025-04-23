@@ -10,12 +10,13 @@ interface JobReview {
 }
 
 const AJR = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [reviews, setReviews] = useState<JobReview[]>([]);
 
   const fetchReviews = () => {
     axios
-      .get(`http://localhost:8080/auth/getJobsReview/${id}`)
+      .get(`${serverURL}/auth/getJobsReview/${id}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error('Error fetching reviews:', err));
   };
@@ -26,7 +27,7 @@ const AJR = () => {
 
   const handleDelete = (reviewId: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteJobsReview/${reviewId}`)
+      .delete(`${serverURL}/auth/deleteJobsReview/${reviewId}`)
       .then(() => {
         setReviews((prev) => prev.filter((r) => r.id !== reviewId));
       })

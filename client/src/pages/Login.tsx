@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -18,7 +19,7 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", user);
+      const response = await axios.post(`${serverURL}/auth/login`, user);
       console.log("Login success", response.data);
       sessionStorage.setItem('token', response.data.token);
       navigate("/dashboard");

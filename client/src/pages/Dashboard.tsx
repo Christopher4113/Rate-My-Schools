@@ -43,6 +43,7 @@ const FeatureList: React.FC = () => {
 };
 
 const Dashboard: React.FC = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [schools, setSchools] = useState<School[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredSchools, setFilteredSchools] = useState<School[]>([]);
@@ -50,7 +51,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<School[]>("http://localhost:8080/auth/schools")
+      .get<School[]>(`${serverURL}/auth/schools`)
       .then((response) => {
         setSchools(response.data);
         setFilteredSchools(response.data);

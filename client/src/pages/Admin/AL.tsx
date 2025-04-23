@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AL = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [lifeStylesList, setLifeStylesList] = useState<LifeStyle[]>([]);
@@ -24,7 +25,7 @@ const AL = () => {
 
   const fetchLifeStyles = () => {
     axios
-      .get(`http://localhost:8080/auth/getLifeStyles/${schoolId}`)
+      .get(`${serverURL}/auth/getLifeStyles/${schoolId}`)
       .then((res) => setLifeStylesList(res.data))
       .catch((err) => console.error('Error fetching lifestyles:', err));
   };
@@ -42,13 +43,13 @@ const AL = () => {
       };
 
       if (isUpdating && selectedLifeStyleId !== null) {
-        await axios.put('http://localhost:8080/auth/updateLifeStyles', {
+        await axios.put(`${serverURL}/auth/updateLifeStyles`, {
           id: selectedLifeStyleId,
           ...payload,
         });
         alert('Lifestyle updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postLifeStyles', payload);
+        await axios.post(`${serverURL}/auth/postLifeStyles`, payload);
         alert('Lifestyle added!');
       }
 
@@ -61,7 +62,7 @@ const AL = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteLifeStyles/${id}`)
+      .delete(`${serverURL}/auth/deleteLifeStyles/${id}`)
       .then(() => fetchLifeStyles())
       .catch((error) => console.error('Delete failed:', error));
   };

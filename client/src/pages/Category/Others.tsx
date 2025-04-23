@@ -11,11 +11,12 @@ interface Form {
 
 
 const Others = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const {id} = useParams();
   console.log(id)
   const [formData, setFormData] = useState<Form[]>([])
   useEffect(() => {
-    axios.get<Form[]>(`http://localhost:8080/auth/getOthers/${id}`)
+    axios.get<Form[]>(`${serverURL}/auth/getOthers/${id}`)
          .then((response) => {
           console.log(response.data)
           setFormData(response.data)

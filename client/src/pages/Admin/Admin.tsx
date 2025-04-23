@@ -10,11 +10,12 @@ interface User {
 }
 
 const Admin = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [users, setUsers] = useState<User[]>([]);
 
   const fetchUsers = () => {
     axios
-      .get('http://localhost:8080/auth/getUsers')
+      .get(`${serverURL}/auth/getUsers`)
       .then((response) => {
         setUsers(response.data);
       })
@@ -27,7 +28,7 @@ const Admin = () => {
 
   const deleteUser = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteUser/${id}`)
+      .delete(`${serverURL}/auth/deleteUser/${id}`)
       .then(() => {
         setUsers((prev) => prev.filter((user) => user.id !== id));
       })
@@ -36,7 +37,7 @@ const Admin = () => {
 
   const toggleAdmin = (id: number, isAdmin: boolean) => {
     axios
-      .put(`http://localhost:8080/auth/updateUser/${id}`, { isAdmin: !isAdmin })
+      .put(`${serverURL}/auth/updateUser/${id}`, { isAdmin: !isAdmin })
       .then(() => {
         setUsers((prev) =>
           prev.map((user) =>

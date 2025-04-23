@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AC = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [clubsList, setClubsList] = useState<Club[]>([]);
@@ -24,7 +25,7 @@ const AC = () => {
 
   const fetchClubs = () => {
     axios
-      .get(`http://localhost:8080/auth/getClubs/${schoolId}`)
+      .get(`${serverURL}/auth/getClubs/${schoolId}`)
       .then((res) => setClubsList(res.data))
       .catch((err) => console.error('Error fetching clubs:', err));
   };
@@ -42,13 +43,13 @@ const AC = () => {
       };
 
       if (isUpdating && selectedClubId !== null) {
-        await axios.put('http://localhost:8080/auth/updateClubs', {
+        await axios.put(`${serverURL}/auth/updateClubs`, {
           id: selectedClubId,
           ...payload,
         });
         alert('Club updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postClubs', payload);
+        await axios.post(`${serverURL}/auth/postClubs`, payload);
         alert('Club added!');
       }
 
@@ -61,7 +62,7 @@ const AC = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteClubs/${id}`)
+      .delete(`${serverURL}/auth/deleteClubs/${id}`)
       .then(() => fetchClubs())
       .catch((error) => console.error('Delete failed:', error));
   };

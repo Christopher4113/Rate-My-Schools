@@ -11,6 +11,7 @@ interface Form {
 }
 
 const LifeStylesReview = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [formData,setFormData] = useState<Form[]>([])
   const [totalReviews, setTotalReviews] = useState(0);
@@ -20,7 +21,7 @@ const LifeStylesReview = () => {
   const [reviewText, setReviewText] = useState("")
 
   useEffect(() => {
-    axios.get<Form[]>(`http://localhost:8080/auth/getLifeStylesReview/${id}`)
+    axios.get<Form[]>(`${serverURL}/auth/getLifeStylesReview/${id}`)
       .then((response) => {
         // Sort the data by createdAt date (newest first)
         const sortedData = [...response.data].sort((a, b) => 
@@ -32,7 +33,7 @@ const LifeStylesReview = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getLifeStylesAverageRating/${id}`)
+    axios.get(`${serverURL}/auth/getLifeStylesAverageRating/${id}`)
       .then(response => {
         const data = response.data;
         setAverageRating(data.averageRating);
@@ -41,7 +42,7 @@ const LifeStylesReview = () => {
   }, [id]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getLifeStylesTotalReviews/${id}`)
+    axios.get(`${serverURL}/auth/getLifeStylesTotalReviews/${id}`)
       .then(response => {
         const data = response.data;
         setTotalReviews(data.totalReviews);
@@ -50,7 +51,7 @@ const LifeStylesReview = () => {
   }, [id]);
   
   useEffect(() => {
-    axios.get(`http://localhost:8080/auth/getLifeStylesCategory/${id}`)
+    axios.get(`${serverURL}/auth/getLifeStylesCategory/${id}`)
          .then(response => {
           const data = response.data;
           setCategory(data.category)
@@ -63,7 +64,7 @@ const LifeStylesReview = () => {
     
   
     try {
-      await axios.post("http://localhost:8080/auth/postLifeStylesReview", {
+      await axios.post(`${serverURL}/auth/postLifeStylesReview`, {
         lifeStyle: { id: Number(id) },
         rating,
         review: reviewText,
@@ -75,17 +76,17 @@ const LifeStylesReview = () => {
       setReviewText("");
       
       // Refresh all data after submission
-      const reviewResponse = await axios.get<Form[]>(`http://localhost:8080/auth/getLifeStylesReview/${id}`);
+      const reviewResponse = await axios.get<Form[]>(`${serverURL}/auth/getLifeStylesReview/${id}`);
       const sortedData = [...reviewResponse.data].sort((a, b) => 
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
       setFormData(sortedData);
       
       // Refresh average rating and total reviews
-      const avgResponse = await axios.get(`http://localhost:8080/auth/getLifeStylesAverageRating/${id}`);
+      const avgResponse = await axios.get(`${serverURL}/auth/getLifeStylesAverageRating/${id}`);
       setAverageRating(avgResponse.data.averageRating);
       
-      const totalResponse = await axios.get(`http://localhost:8080/auth/getLifeStylesTotalReviews/${id}`);
+      const totalResponse = await axios.get(`${serverURL}/auth/getLifeStylesTotalReviews/${id}`);
       setTotalReviews(totalResponse.data.totalReviews);
       
     } catch (error: any) {

@@ -16,6 +16,7 @@ const initialForm = {
 };
 
 const AdminSchool = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [schools, setSchools] = useState<School[]>([]);
   const [formData, setFormData] = useState(initialForm);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -24,7 +25,7 @@ const AdminSchool = () => {
   // Fetch all schools
   const fetchSchools = () => {
     axios
-      .get('http://localhost:8080/auth/schools')
+      .get(`${serverURL}/auth/schools`)
       .then((res) => setSchools(res.data))
       .catch((err) => console.error('Error fetching schools:', err));
   };
@@ -38,13 +39,13 @@ const AdminSchool = () => {
     e.preventDefault();
     try {
       if (isUpdating && selectedSchoolId !== null) {
-        await axios.put('http://localhost:8080/auth/updateSchool', {
+        await axios.put(`${serverURL}/auth/updateSchool`, {
           id: selectedSchoolId,
           ...formData,
         });
         alert('School updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postSchool', formData);
+        await axios.post(`${serverURL}/auth/postSchool`, formData);
         alert('School added!');
       }
 
@@ -58,7 +59,7 @@ const AdminSchool = () => {
   // Delete school
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteSchool/${id}`)
+      .delete(`${serverURL}/auth/deleteSchool/${id}`)
       .then(() => {
         fetchSchools();
       })
@@ -68,7 +69,7 @@ const AdminSchool = () => {
   // Update button clicked
   const handleEdit = (id: number) => {
     axios
-      .get(`http://localhost:8080/auth/getSchool/${id}`)
+      .get(`${serverURL}/auth/getSchool/${id}`)
       .then((res) => {
         setFormData({
           schoolName: res.data.schoolName,

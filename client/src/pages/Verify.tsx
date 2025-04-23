@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import {useNavigate,useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 const Verify = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const [verificationCode, setVerificationCode] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Verify = () => {
   const handleVerify = async (e:any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/auth/verify", {
+      const response = await axios.post(`${serverURL}/auth/verify`, {
         email,
         verificationCode
       });
@@ -42,7 +43,7 @@ const Verify = () => {
   const resendCode = async (e:any) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/auth/resend?email=${encodeURIComponent(email)}`, null);
+      const response = await axios.post(`${serverURL}/auth/resend?email=${encodeURIComponent(email)}`, null);
       console.log("Resend Sucessful" + response.data);
       alert("Resend Successful Check Email");
     } catch (error: any) {

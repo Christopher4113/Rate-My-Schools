@@ -10,12 +10,13 @@ interface MajorReview {
 }
 
 const AMR = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const [reviews, setReviews] = useState<MajorReview[]>([]);
 
   const fetchReviews = () => {
     axios
-      .get(`http://localhost:8080/auth/getMajorsReview/${id}`)
+      .get(`${serverURL}/auth/getMajorsReview/${id}`)
       .then((res) => setReviews(res.data))
       .catch((err) => console.error('Error fetching reviews:', err));
   };
@@ -26,7 +27,7 @@ const AMR = () => {
 
   const handleDelete = (reviewId: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteMajorsReview/${reviewId}`)
+      .delete(`${serverURL}/auth/deleteMajorsReview/${reviewId}`)
       .then(() => {
         setReviews((prev) => prev.filter((r) => r.id !== reviewId));
       })

@@ -15,6 +15,7 @@ const initialForm = {
 };
 
 const AH = () => {
+  const serverURL = import.meta.env.VITE_SERVER_URL
   const { id } = useParams();
   const schoolId = Number(id);
   const [housingList, setHousingList] = useState<Housing[]>([]);
@@ -24,7 +25,7 @@ const AH = () => {
 
   const fetchHousing = () => {
     axios
-      .get(`http://localhost:8080/auth/getHousing/${schoolId}`)
+      .get(`${serverURL}/auth/getHousing/${schoolId}`)
       .then((res) => setHousingList(res.data))
       .catch((err) => console.error('Error fetching housing:', err));
   };
@@ -42,13 +43,13 @@ const AH = () => {
       };
 
       if (isUpdating && selectedHousingId !== null) {
-        await axios.put('http://localhost:8080/auth/updateHousing', {
+        await axios.put(`${serverURL}/auth/updateHousing`, {
           id: selectedHousingId,
           ...payload,
         });
         alert('Housing updated!');
       } else {
-        await axios.post('http://localhost:8080/auth/postHousing', payload);
+        await axios.post(`${serverURL}/auth/postHousing`, payload);
         alert('Housing added!');
       }
 
@@ -61,7 +62,7 @@ const AH = () => {
 
   const handleDelete = (id: number) => {
     axios
-      .delete(`http://localhost:8080/auth/deleteHousing/${id}`)
+      .delete(`${serverURL}/auth/deleteHousing/${id}`)
       .then(() => fetchHousing())
       .catch((error) => console.error('Delete failed:', error));
   };

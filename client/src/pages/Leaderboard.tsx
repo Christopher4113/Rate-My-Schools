@@ -2,15 +2,15 @@ import {useState} from 'react'
 
 import BarChartCard from '@/components/custom/BarChartCard';
 
-
+const serverURL = import.meta.env.VITE_SERVER_URL
 const chartConfigs = [
-    { title: "Athletics", endpoint: `http://localhost:8080/auth/getAllSchoolsAthleticsAverage` },
-    { title: "Clubs", endpoint: `http://localhost:8080/auth/getAllSchoolsClubsAverage` },
-    { title: "Housing", endpoint: `http://localhost:8080/auth/getAllSchoolsHousingAverage` },
-    { title: "Jobs", endpoint: `http://localhost:8080/auth/getAllSchoolsJobsAverage` },
-    { title: "Lifestyle", endpoint: `http://localhost:8080/auth/getAllSchoolsLifeStyleAverage` },
-    { title: "Majors", endpoint: `http://localhost:8080/auth/getAllSchoolsMajorsAverage` },
-    { title: "Others", endpoint: `http://localhost:8080/auth/getAllSchoolsOthersAverage` },
+    { title: "Athletics", endpoint: `${serverURL}/auth/getAllSchoolsAthleticsAverage` },
+    { title: "Clubs", endpoint: `${serverURL}/auth/getAllSchoolsClubsAverage` },
+    { title: "Housing", endpoint: `${serverURL}/auth/getAllSchoolsHousingAverage` },
+    { title: "Jobs", endpoint: `${serverURL}/auth/getAllSchoolsJobsAverage` },
+    { title: "Lifestyle", endpoint: `${serverURL}/auth/getAllSchoolsLifeStyleAverage` },
+    { title: "Majors", endpoint: `${serverURL}/auth/getAllSchoolsMajorsAverage` },
+    { title: "Others", endpoint: `${serverURL}/auth/getAllSchoolsOthersAverage` },
 ];
 const Leaderboard = () => {
     const [current, setCurrent] = useState(0);
