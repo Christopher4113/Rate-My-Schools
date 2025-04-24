@@ -23,8 +23,17 @@ const Signup = () => {
     setConfirm(e.target.value);
   };
 
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     if (password !== confirm) {
       alert("Passwords do not match. Please check and try again.");
       return;

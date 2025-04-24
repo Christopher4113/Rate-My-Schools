@@ -17,9 +17,16 @@ const Forgot = () => {
     setConfirm(e.target.value);
   };
   const {email, newPassword } = user;
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
   
   const handleForgot = async (e: any) => {
     e.preventDefault();
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
     if (newPassword !== confirm) {
       alert("Passwords do not match please try again");
       return

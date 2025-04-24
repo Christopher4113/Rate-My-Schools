@@ -15,9 +15,16 @@ const Login = () => {
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
     try {
       const response = await axios.post(`${serverURL}/auth/login`, user);
       console.log("Login success", response.data);
