@@ -61,7 +61,7 @@ const Housing = () => {
             <div key={category.id} className="flex items-center mb-4">
               <Link
                 to={`/housingreview/${category.id}`} // Use the category id in the URL
-                className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white w-32 flex items-center justify-center text-center"
+                className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white w-32 flex items-center justify-center text-center"
               >
                 {category.type} {/* Display the category name on the button */}
               </Link>

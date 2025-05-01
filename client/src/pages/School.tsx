@@ -68,12 +68,12 @@ const School = () => {
           <h2 className="text-2xl font-bold mb-4 text-gray-800">Categories</h2>
           
           <div className="flex items-center mb-4">
-            <Link to={`/athletics/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 text-white w-32">Athletics</Link>
+            <Link to={`/athletics/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white w-32">Athletics</Link>
             <p className="ml-4 text-gray-700">Rate and review sports programs, facilities, and game experiences</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <Link to={`/clubs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-red-500 text-white w-32">Clubs</Link>
+            <Link to={`/clubs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-rose-500 text-white w-32">Clubs</Link>
             <p className="ml-4 text-gray-700">Explore and rate student organizations and extracurricular activities</p>
           </div>
           
@@ -83,17 +83,17 @@ const School = () => {
           </div>
           
           <div className="flex items-center mb-4">
-            <Link to={`/jobs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-yellow-500 text-white w-32">Jobs</Link>
+            <Link to={`/jobs/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-amber-500 text-white w-32">Jobs</Link>
             <p className="ml-4 text-gray-700">Information about campus employment and career opportunities</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <Link to={`/lifestyles/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white w-32">LifeStyles</Link>
+            <Link to={`/lifestyles/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-emerald-500 text-white w-32">LifeStyles</Link>
             <p className="ml-4 text-gray-700">Reviews about campus life, culture, and social experiences</p>
           </div>
           
           <div className="flex items-center mb-4">
-            <Link to={`/majors/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-orange-500 text-white w-32">Majors</Link>
+            <Link to={`/majors/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-amber-600 text-white w-32">Majors</Link>
             <p className="ml-4 text-gray-700">Ratings and reviews of academic programs and departments</p>
           </div>
           

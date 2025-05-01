@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ import useNavigate
 import axios from 'axios';
 
 interface School {
@@ -7,19 +8,22 @@ interface School {
 }
 
 const AllSchools = () => {
-  const serverURL = import.meta.env.VITE_SERVER_URL
+  const serverURL = import.meta.env.VITE_SERVER_URL;
   const [schools, setSchools] = useState<School[]>([]);
+  const navigate = useNavigate(); // ✅ hook for routing
 
   useEffect(() => {
-    axios.get<School[]>(`${serverURL}/auth/schools`)
+    axios
+      .get<School[]>(`${serverURL}/auth/schools`)
       .then((response) => {
         setSchools(response.data);
       })
       .catch((error) => console.error('Error fetching schools: ', error));
   }, []);
 
+  // ✅ redirect to /school/:id when a school is clicked
   const handleSchoolClick = (id: number) => {
-    console.log('School ID clicked: ', id);
+    navigate(`/school/${id}`);
   };
 
   return (
@@ -38,12 +42,15 @@ const AllSchools = () => {
         }}
       ></div>
 
-      <h1 className="font-bold text-2xl md:text-xl sm:text-lg" style={{ fontFamily: 'Times New Roman, Arial, sans-serif' }}>
+      <h1
+        className="font-bold text-2xl md:text-xl sm:text-lg text-center mt-6"
+        style={{ fontFamily: 'Times New Roman, Arial, sans-serif' }}
+      >
         All Schools
       </h1>
 
       {/* List of Schools */}
-      <ul className="mt-4 p-4">
+      <ul className="mt-4 p-4 flex flex-col items-center">
         {schools.map((school) => (
           <li
             key={school.id}

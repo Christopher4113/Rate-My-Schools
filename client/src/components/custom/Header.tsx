@@ -93,7 +93,7 @@ const Header = () => {
           {!isDashboard && (
             <button
               onClick={handleMenu}
-              className="bg-gradient-to-r from-violet-500 to-violet-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition mt-3"
+              className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition mt-3"
             >
               Menu
             </button>
@@ -109,7 +109,7 @@ const Header = () => {
             </button>
           )}
           {token && (
-            <Link to="/profile" className="text-white bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
+            <Link to="/profile" className="text-white bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
               Profile
             </Link>
           )}
@@ -119,14 +119,14 @@ const Header = () => {
             </Link>
           )}
           {!token && (
-            <Link to="/signup" className="text-white bg-gradient-to-r from-green-500 to-green-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
+            <Link to="/signup" className="text-white bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center">
               Register
             </Link>
           )}
           {token && isAdmin && isDashboard&& (
             <Link
               to="/admin"
-              className="text-white bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
+              className="text-white bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
             >
               Admin
             </Link>
@@ -134,9 +134,9 @@ const Header = () => {
         {!leaderboard && (
           <Link
           to='/leaderboard'
-          className="text-white bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
+          className="text-white bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-2 rounded font-semibold shadow-lg hover:shadow-xl transition text-center"
           >
-            LeaderBoard
+            Leader Boards
           </Link>
         )}
         </div>

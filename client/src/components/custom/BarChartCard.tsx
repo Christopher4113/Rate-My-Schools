@@ -35,7 +35,7 @@ const BarChartCard = ({ title, endpoint }: Props) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="schoolName" />
           <YAxis />
-          <Tooltip />
+          <Tooltip formatter={(value: number) => [`${value.toFixed(2)}`, "Average Rating"]} />
           <Bar dataKey="averageRating" fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
