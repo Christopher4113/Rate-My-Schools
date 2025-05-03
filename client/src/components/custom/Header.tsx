@@ -54,17 +54,17 @@ const Header = () => {
       className={`relative w-full h-16 flex items-center justify-between px-5 shadow-sm z-50 
                  max-sm:h-14 max-sm:px-3 ${isDashboard ? "bg-blue-600" : "bg-blue-500"}`}
     >
-      {/* Option Button */}
-      <div className="flex items-center -mt-6 max-sm:-ml-8">
+      {/* Sidebar toggle on the left */}
+      <div className="flex items-center -mt-6 max-sm:-ml-8 z-10">
         <Option onClick={toggleSidebar} />
       </div>
 
-      {/* Main Title */}
-      <div className="text-center text-white font-semibold text-3xl max-sm:text-xl">
+      {/* Centered title using absolute + transform */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-white font-semibold text-3xl max-sm:text-xl">
         RateMySchools
       </div>
 
-      {/* Spacer to balance alignment */}
+      {/* Empty placeholder div to balance layout */}
       <div className="w-[44px]"></div>
 
       {/* Sidebar */}
