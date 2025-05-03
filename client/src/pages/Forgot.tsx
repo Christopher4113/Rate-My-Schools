@@ -60,7 +60,7 @@ const Forgot = () => {
           <div
             className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
             style={{
-              backgroundImage: "url('public/forest.jpg')",
+              backgroundImage: "url('/forest.jpg')",
             }}
           >
             <h1 className="text-white text-3xl mb-3">Reset Your Password</h1>

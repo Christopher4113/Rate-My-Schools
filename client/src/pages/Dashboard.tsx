@@ -11,17 +11,17 @@ const FeatureList: React.FC = () => {
   const features = [
     {
       text: "Search for schools and write anonymous reviews",
-      img: "/public/school.png",
+      img: "/school.png",
       alt: "School",
     },
     {
       text: "Create your profile and utilize personalized features",
-      img: "/public/profile.png",
+      img: "/profile.png",
       alt: "Profile",
     },
     {
       text: "Check out our leaderboard and see where each school ranks",
-      img: "/public/leaderboard.png",
+      img: "/leaderboard.png",
       alt: "Leaderboard",
     }
   ];

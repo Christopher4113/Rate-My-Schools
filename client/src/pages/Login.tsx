@@ -57,7 +57,7 @@ const Login = () => {
           <div
             className="w-full lg:w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
             style={{
-              backgroundImage: "url('public/Register-Background.png')",
+              backgroundImage: "url('/Register-Background.png')",
             }}
           >
             <h1 className="text-white text-3xl mb-3">Welcome Back!</h1>
