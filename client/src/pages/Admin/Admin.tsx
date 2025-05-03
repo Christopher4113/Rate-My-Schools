@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 interface User {

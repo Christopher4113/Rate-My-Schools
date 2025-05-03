@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation, Link} from "react-router-dom";
 import Option from "../ui/option";
 import {jwtDecode} from "jwt-decode";

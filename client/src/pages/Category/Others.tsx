@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react'
 import { useParams,Link } from 'react-router-dom'
 import axios from 'axios'
-import { error } from 'console';
 
 interface Form {
   id: number,
