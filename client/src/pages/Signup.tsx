@@ -41,7 +41,7 @@ const Signup = () => {
     try {
       const response = await axios.post(`${serverURL}/auth/signup`, user);
       console.log("Signup success", response.data);
-      alert("Check your email to verify your account");
+      alert("Check your email or spam folder to verify your account.");
       navigate(`/verify?email=${encodeURIComponent(email)}`);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {

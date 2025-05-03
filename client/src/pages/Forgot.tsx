@@ -34,7 +34,7 @@ const Forgot = () => {
     try {
       const response = await axios.post(`${serverURL}/auth/forgotPassword`, { email })
       console.log("Forgot was a success" + response.data)
-      alert("Check your email to change your password")
+      alert("Check your email or spam folder to change your password")
       navigate(`/change?email=${encodeURIComponent(email)}&newPassword=${encodeURIComponent(newPassword)}`);
     } catch (error: any) {
       if (error.response && error.response.data && error.response.data.error) {
