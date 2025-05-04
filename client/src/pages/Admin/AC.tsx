@@ -33,7 +33,6 @@ const AC = () => {
   useEffect(() => {
     fetchClubs();
   }, [schoolId]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
