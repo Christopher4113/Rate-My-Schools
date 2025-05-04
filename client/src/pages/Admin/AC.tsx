@@ -38,14 +38,16 @@ const AC = () => {
     e.preventDefault();
     try {
       const payload = {
-        ...formData,
+        clubName: formData.category,  // correct mapping
+        description: formData.description,
         schoolId,
       };
 
       if (isUpdating && selectedClubId !== null) {
         await axios.put(`${serverURL}/auth/updateClubs`, {
           id: selectedClubId,
-          ...payload,
+          clubName: formData.category,
+          description: formData.description,
         });
         alert('Club updated!');
       } else {
