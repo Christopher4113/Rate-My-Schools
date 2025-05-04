@@ -93,7 +93,7 @@ const School = () => {
           </div>
           
           <div className="flex items-center mb-4">
-            <Link to={`/majors/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-amber-600 text-white w-32">Majors</Link>
+            <Link to={`/majors/${id}`} className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-amber-600 text-white w-32">Academics</Link>
             <p className="ml-4 text-gray-700">Ratings and reviews of academic programs and departments</p>
           </div>
           

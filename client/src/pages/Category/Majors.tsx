@@ -69,7 +69,7 @@ const Majors = () => {
         ))}
       </div>
       <div className="md:w-1/2 bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">About the University Clubs</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-800">About the Academics</h2>
         {formData.map((category) => (
           <div key={category.id} className="mb-6">
             <h3 className="text-xl font-semibold mb-2 text-gray-700">{category.majorName}</h3>
