@@ -69,7 +69,7 @@ const Header = () => {
 
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="absolute top-0 right-0 h-screen w-64 bg-gray-800 text-white shadow-lg z-50 flex flex-col p-5 space-y-5">
+        <div className="absolute top-0 left-0 h-screen w-64 bg-gray-800 text-white shadow-lg z-50 flex flex-col p-5 space-y-5">
           {/* Close Sidebar Button */}
           <button
             onClick={toggleSidebar}
