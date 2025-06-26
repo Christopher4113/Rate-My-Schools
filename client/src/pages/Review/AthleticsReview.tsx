@@ -2,12 +2,20 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import {jwtDecode} from 'jwt-decode'
 
 interface Form {
   id: number,
   rating: number,
   review: string,
+  username?: string,
   createdAt: string,
+}
+
+interface JwtPayload {
+  sub: string;
+  exp: number;
+  userId?: number;
 }
 
 const AthleticsReview = () => {
@@ -19,6 +27,24 @@ const AthleticsReview = () => {
   const [category, setCategory] = useState("");
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [userId, setUserId] = useState<number>(0);
+  const [username, setUsername] = useState("");
+  const token = sessionStorage.getItem('token');
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        if (decoded.userId) {
+          setUserId(decoded.userId);
+        }
+        if (decoded.sub) {
+          setUsername(decoded.sub); // `sub` is your username
+        }
+      } catch (err) {
+        console.error("Invalid token", err);
+      }
+    }
+  }, [token]);
 
   useEffect(() => {
     axios.get<Form[]>(`${serverURL}/auth/getAthleticsReview/${id}`)
@@ -61,6 +87,8 @@ const AthleticsReview = () => {
     try {
       await axios.post(`${serverURL}/auth/postAthleticsReview`, {
         athletics: { id: Number(id) },
+        userId,
+        username,
         rating,
         review: reviewText,
       });
@@ -157,6 +185,9 @@ const AthleticsReview = () => {
                     month: 'long',
                     day: 'numeric',
                   })}
+                </p>
+                <p className="text-sm text-gray-500 italic">
+                  {review.username ? `Reviewed by ${review.username}` : ""}
                 </p>
               </div>
             ))
